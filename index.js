@@ -1,16 +1,64 @@
-// Write one example explaining how you can write a callback function ?
-function fun1(name) {
-    console.log("hello " + name);
-    callback("Ayush");     //we pass function to another function as an argument
+//Ques--1.Write one example explaining how you can write a callback function.
+function greeting(name) {
+    alert(`Hello, ${name}`);
 }
-function callback(name) {
-    console.log("WELCOME TO INDIA " + name);
-}
-fun1("Ayush");
 
-// Que2 =>
-// "Write callback function to print numbers from 1 to 7, in which 1 should be printed after 1 sec , 2 should be printed after 2 sec, 3 should be printed after 3 sec and so on. 
+function processUserInput(callback) {
+    const name = prompt('Please enter your name.');
+    callback(name);
+}
+processUserInput(greeting);
+
+//Ques--2."Write callback function to print numbers from 1 to 7, in which 1 should be printed after 1 sec , 2 should be printed after 2 sec, 3 should be printed after 3 sec and so on. 
+
+// Explain callback hell.
 // Numbers
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6
+// 7"------->
+
+const num = () => {
+    console.log("Print all the numbers");
+    setTimeout(() => {
+        console.log(1)
+
+        setTimeout(() => {
+            console.log(2);
+
+            setTimeout(() => {
+                console.log(3);
+
+                setTimeout(() => {
+
+                    console.log(4);
+
+                    setTimeout(() => {
+                        console.log(5);
+
+                        setTimeout(() => {
+                            console.log(6);
+
+                            setTimeout(() => {
+                                console.log(7);
+                            }, 1000);
+
+                        }, 1000);
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }, 1000);
+
+    }, 1000);
+}
+
+
+num();
+//  Ques--3. Write promise function to print numbers from 1 to 7, in which 1 should be printed after 1 sec , 2 should be printed after 2 sec, 3 should be printed after 3 sec and so on. 
+// Numbers :
 // 1
 // 2
 // 3
@@ -18,144 +66,97 @@ fun1("Ayush");
 // 5
 // 6
 // 7
+// 
+let promFun = (delay) =>
+    new Promise((resolve) => setTimeout(resolve, delay));
 
-function fun2() {
-    setTimeout(() => {
-        console.log(1)
-    }, 1000)
-    setTimeout(() => {
-        console.log(2)
-    }, 2000)
-    setTimeout(() => {
-        console.log(3)
-    }, 3000)
-    setTimeout(() => {
-        console.log(4)
-    }, 4000)
-    setTimeout(() => {
-        console.log(5)
-    }, 5000)
-    setTimeout(() => {
-        console.log(6)
-    }, 6000)
-    setTimeout(() => {
-        console.log(7)
-    }, 7000)
-}
-// fun2();
+for (let num = 1; num <= 7; num++)
+    promFun(num * 1000).then();
 
+promFun(1000).then(() => console.log(1));
+promFun(2000).then(() => console.log(2));
+promFun(3000).then(() => console.log(3));
+promFun(4000).then(() => console.log(4));
+promFun(5000).then(() => console.log(5));
+promFun(6000).then(() => console.log(6));
+promFun(7000).then(() => console.log(7));
 
+//Ques--4. Create a promise function accepting a argument, if yes is passed to the function then it should go to resolved state and print Promise Resolved, and if nothing is passed then it should go to reject state and catch the error and print Promise Rejected 
 
-// Que3 =>
-// "Write promise function to print numbers from 1 to 7, in which 1 should be printed after 1 sec , 2 should be printed after 2 sec, 3 should be printed after 3 sec and so on.
-// Numbers
-// 1
-// 2
-// 3
-// 4
-// 5
-// 6
-// 7"
-let prom = new Promise((resolve, reject) => {
-    // resolve();
-})
-
-
-
-prom.then(() => {
-    setTimeout(() => {
-        console.log(1);
-    }, 1000)
-}).then(() => {
-    setTimeout(() => {
-        console.log(2);
-    }, 2000)
-}).then(() => {
-    setTimeout(() => {
-        console.log(3);
-    }, 3000)
-}).then(() => {
-    setTimeout(() => {
-        console.log(4);
-    }, 4000)
-}).then(() => {
-    setTimeout(() => {
-        console.log(5);
-    }, 5000)
-}).then(() => {
-    setTimeout(() => {
-        console.log(6);
-    }, 6000)
-}).then(() => {
-    setTimeout(() => {
-        console.log(7);
-    }, 7000)
-}).catch(() => {
-    console.log("reject");
-})
-
-
-
-// Que4 =>
-// Create a promise function accepting a argument, if yes is passed to the function then it should go to resolved state and print Promise Resolved, and if nothing is passed then it should go to reject state and catch the error and print Promise Rejected
-// Que5 =>
-// Create examples to explain promises function
-
-function prom2(n) {
-    new Promise((resolve, reject) =>{
-        if( n === "yes"){
-            return resolve();
+let promiseFunction = (argument) =>
+    new Promise((Pass, Fail) => {
+        if (argument == "yes") {
+            return Pass();
         }
-        else{
-            return reject();
+        else {
+            return Fail();
         }
-    }).then(()=>{
-        console.log("Promise resolve");
-    }).catch(()=>{
-        console.log("Promise reject");
     })
+promiseFunction("yes").then(() => {
+    console.log("Promise Resolved");
+}).catch(() => {
+    console.log("Promise Rejected")
+})
+
+
+//Ques--5. Create examples to explain callback function.
+
+function greeting(name, callback) {
+    console.log('Hi' + ' ' + name);
+    callback();
 }
 
-prom2("yes");
-
-
-
-// Que6 =>
-// Create examples to explain callback hell function
-// callback hell means one callback inside another callback function or we can say nested callback that's called callback hell
-// this example is to print one after one sec, two after two sec so on..
-let call = () => {
-    setTimeout(() =>{
-        console.log("one");
-        setTimeout(() =>{
-            console.log("Two");
-            setTimeout(() =>{
-                console.log("three");
-                setTimeout(() =>{
-                    console.log("four");
-                    setTimeout(() =>{
-                        console.log("five");
-                    },1000)
-                },1000) 
-            },1000)
-        },1000)
-    },1000)
+function callFun() {
+    console.log('Hav a Lovely Day');
 }
-// call();
 
+greeting('Girishma', callFun);
 
-// Que.7 =>
-// Create examples to explain async await function
-// when we write async before function means that function always return promise, return promise means return some data 
-// await keyword we can write only in async function 
+// Ques--6. Create examples to explain callback hell function
+const msgOne = () => {
+    setTimeout(() => {
+        console.log("Hiiiiiiii");
+    }, 2000);
+};
+const msg = () => {
+    console.log("Called");
+    msgOne();
+    console.log("In Queue");
+};
+msg();
 
-async function funn(){
-    console.log("this is first thing");
-    const acpt = await fetch("https://api.github.com/users");
-    console.log("this is second one");
-    const user = await acpt.json();
-    return user;
+//Ques--7. Create examples to explain promises function
+var promise = new Promise(function (resolve, reject) {
+    const msg1 = "Hiiii";
+    const msg2 = "Hiiii"
+    if (msg1 === msg2) {
+        resolve();
+    } else {
+        reject();
+    }
+});
+promise.
+    then(function () {
+        console.log('Success');
+    }).
+    catch(function () {
+        console.log('Error');
+    });
+
+//Ques--8. Create examples to explain async await function
+let promise = new Promise(function (resolve, reject) {
+    setTimeout(function () {
+        resolve('Promise resolved')
+    }, 4000);
+});
+async function asyncFunc() {
+    try {
+        let result = await promise;
+
+        console.log(result);
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
-let done = funn();
-console.log(done);      //here promise is pending
-done.then(data => console.log(data))        //here is resolve now
+asyncFunc();
